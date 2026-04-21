@@ -18,6 +18,8 @@ This project includes:
 ## Project Structure
 
 ```text
+api/
+  index.py
 backend/
   app/
     __init__.py
@@ -43,6 +45,7 @@ frontend/
   package.json
   vite.config.js
 requirements.txt
+vercel.json
 ```
 
 ## Notes
@@ -87,9 +90,46 @@ Frontend will run at `http://127.0.0.1:5173`.
 - `GET /api/constituencies`
 - `GET /api/geojson`
 
+For Vercel Python runtime compatibility, the backend also exposes:
+
+- `GET /summary`
+- `GET /constituencies`
+- `GET /geojson`
+
 ## What the Dashboard Shows
 
 - seat projection by party
 - state-wide vote share forecast
 - interactive constituency map
 - constituency-level probability breakdown on click
+
+## Deploy On Vercel
+
+This repo is set up to deploy both the React frontend and FastAPI backend on Vercel.
+
+How it works:
+
+- Vercel builds the frontend from `frontend/`
+- the static site is served from `frontend/dist`
+- FastAPI is exposed through `api/index.py` as a Python Function
+- in production, the frontend calls same-origin `/api/*` endpoints automatically
+
+### Deploy steps
+
+1. Push this repo to GitHub.
+2. Import the repository into Vercel.
+3. Keep the project root as the repository root.
+4. Vercel will use:
+   - Build Command: `npm run build --prefix frontend`
+   - Output Directory: `frontend/dist`
+5. Deploy.
+
+### Optional environment variable
+
+For local overrides or custom API hosts, you can set:
+
+```bash
+VITE_API_BASE_URL=https://your-api-host.example.com
+```
+
+You do not need this variable on Vercel if frontend and backend are deployed in the same project.
