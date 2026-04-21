@@ -5,7 +5,7 @@ A full-stack demo for projecting Tamil Nadu assembly election outcomes across 23
 This project includes:
 
 - `FastAPI` backend for model training and prediction APIs
-- `XGBoost` classification and regression models
+- `XGBoost` classification and regression
 - synthetic but structured election dataset generation for all 234 seats
 - `React + Leaflet` frontend with an interactive constituency map
 - seat projection and vote-share summary tables
